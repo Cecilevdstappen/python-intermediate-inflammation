@@ -60,14 +60,10 @@ def test_daily_min_string():
 @pytest.mark.parametrize(
     "test, expected",
     [
-        ([[0, 0, 0], [0, 0, 0], [0, 0, 0]], [0, 0, 0]),
-        ([[4, 2, 5], [1, 6, 2], [4, 1, 9]], [1, 1, 2]),
-        ([[4, -2, 5], [1, -6, 2], [-4, -1, 9]], [-4, -6, 2]),
-    ],
-)
-
-# suggested by carlosug
+        ([ [0, 0, 0], [0, 0, 0], [0, 0, 0] ], [0, 0, 0]),
+        ([ [4, 2, 5], [1, 6, 2], [4, 1, 9] ], [1.456, 2.1469, 2.86176]),
+        ([ [4, -2, 5], [1, -6, 2], [-4, -1, 9] ], [3.2965, 2.2469, 2.8676]),
+    ])
 def test_daily_stdv(test, expected):
-    """Test standard deviation function works for array of zeroes and positive integitgers."""
     from inflammation.models import daily_std_dev
-    npt.assert_array_equal(daily_std_dev(np.array(test)), np.array(expected))
+    npt.assert_allclose(daily_std_dev(np.array(test)), np.array(expected))
