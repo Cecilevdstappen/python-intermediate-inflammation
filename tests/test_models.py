@@ -55,3 +55,15 @@ def test_daily_min_string():
 
     with pytest.raises(TypeError):
         error_expected = daily_min([["Hello", "there"], ["General", "Kenobi"]])
+
+
+@pytest.mark.parametrize(
+    "test, expected",
+    [
+        ([ [0, 0, 0], [0, 0, 0], [0, 0, 0] ], [0, 0, 0]),
+        ([ [4, 2, 5], [1, 6, 2], [4, 1, 9] ], [1.414214, 2.160247, 2.867442]),
+        ([ [4, -2, 5], [1, -6, 2], [-4, -1, 9] ], [3.299832, 2.160247, 2.867442]),
+    ])
+def test_daily_stdv(test, expected):
+    from inflammation.models import daily_std_dev
+    npt.assert_allclose(daily_std_dev(np.array(test)), np.array(expected), atol=1e-5)
