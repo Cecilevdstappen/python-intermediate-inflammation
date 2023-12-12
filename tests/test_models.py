@@ -61,9 +61,9 @@ def test_daily_min_string():
     "test, expected",
     [
         ([ [0, 0, 0], [0, 0, 0], [0, 0, 0] ], [0, 0, 0]),
-        ([ [4, 2, 5], [1, 6, 2], [4, 1, 9] ], [1.456, 2.1469, 2.86176]),
-        ([ [4, -2, 5], [1, -6, 2], [-4, -1, 9] ], [3.2965, 2.2469, 2.8676]),
+        ([ [4, 2, 5], [1, 6, 2], [4, 1, 9] ], [1.414214, 2.160247, 2.867442]),
+        ([ [4, -2, 5], [1, -6, 2], [-4, -1, 9] ], [3.299832, 2.160247, 2.867442]),
     ])
 def test_daily_stdv(test, expected):
     from inflammation.models import daily_std_dev
-    npt.assert_allclose(daily_std_dev(np.array(test)), np.array(expected))
+    npt.assert_allclose(daily_std_dev(np.array(test)), np.array(expected), atol=1e-5)
